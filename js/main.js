@@ -1,7 +1,6 @@
 'use strict';
 
 const form = document.querySelector('.js-new-form');
-// form.classList.remove("collapsed");
 
 const list = document.querySelector('.js-list');
 
@@ -89,4 +88,37 @@ if( kittenTwoDesc.includes(descrSearchText) ) {
 if( kittenThreeDesc.includes(descrSearchText) ) {
     list.innerHTML += `${kittenThree}`;
   }
- 
+
+const formMenu = document.querySelector('.js-menu');
+const addButton = document.querySelector(".js-btn-add");
+const inputDesc = document.querySelector('.js-input-desc');
+const inputPhoto = document.querySelector('.js-input-photo');
+const inputName = document.querySelector('.js-input-name');
+const labelMessageError = document.querySelector('.js-label-error');
+const cancel = document.querySelector('.js-cancel');
+
+formMenu.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (form.classList.contains('collapsed')) {
+   form.classList.remove("collapsed"); 
+  } else {
+    form.classList.add('collapsed');
+  }
+})
+
+addButton.addEventListener('click', () => {
+  const valueDesc = inputDesc.value;
+  const valuePhoto = inputPhoto.value;
+  const valueName = inputName.value;
+  if (valueDesc === '' || valuePhoto === '' || valueName === '') {
+  labelMessageError.innerHTML = '¡Uy! parece que has olvidado algo'
+  } else {
+  }
+})
+
+cancel.addEventListener('click', () => {
+  inputDesc.value = '';
+  inputPhoto.value = '';
+  inputName.value = '';
+  form.classList.add('collapsed');
+})
