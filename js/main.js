@@ -21,56 +21,11 @@ const kittenThreeName = 'Cielo';
 const kittenThreeDesc = 'Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.';
 const kittenThreeRace = 'Maine Coon';
 
-const kittenOne = `<li class="card">
-<article>
-  <img
-    class="card_img"
-    src="https://dev.adalab.es/gato-siames.webp"
-    alt="gatito"
-  />
-  <h3 class="card_title">${kittenOneName.toUpperCase()}</h3>
-  <h4 class="card_race">Siamés</h4>
-  <p class="card_description">
-            Porte elegante, su patrón de color tan característico y sus ojos
-            de un azul intenso, pero su historia se remonta a Asía al menos
-            hace 500 años, donde tuvo su origen muy posiblemente.
-   </p>
-</article>
-</li>`;
+renderKitten(kittenOneImage,kittenOneDesc, kittenOneName, kittenOneRace);
 
-const kittenTwo = `<li class="card">
-<article>
-<img
-              class="card_img"
-              src="https://dev.adalab.es/sphynx-gato.webp"
-              alt="sphynx-cat"
-            />
-            <h3 class="card_title">${kittenTwoName.toUpperCase()}</h3>
-            <h4 class="card_race">Sphynx</h4>
-            <p class="card_description">
-              Produce fascinación y curiosidad. Exótico, raro, bello, extraño…
-              hasta con pinta de alienígena han llegado a definir a esta raza
-              gatuna que se caracteriza por la «ausencia» de pelo.
-            </p>
-</article>
-</li>`;
+renderKitten(kittenTwoImage,kittenTwoDesc, kittenTwoName, kittenTwoRace);
 
-const kittenThree = `<li class="card">
-<article>
-<img
-              class="card_img"
-              src="https://dev.adalab.es/maine-coon-cat.webp"
-              alt="maine-coon-cat"
-            />
-            <h3 class="card_title">${kittenThreeName.toUpperCase()}</h3>
-            <h4 class="card_race">Maine Coon</h4>
-            <p class="card_description">
-              Tienen la cabeza cuadrada y los ojos simétricos, por lo que su
-              bella mirada se ha convertido en una de sus señas de identidad.
-              Sus ojos son grandes y las orejas resultan largas y en punta.
-            </p>
-</article>
-</li>`;
+renderKitten(kittenThreeImage,kittenThreeDesc, kittenThreeName, kittenThreeRace);
 
 list.innerHTML = `${kittenOne} ${kittenTwo} ${kittenThree}`;
 
@@ -97,16 +52,25 @@ const inputName = document.querySelector('.js-input-name');
 const labelMessageError = document.querySelector('.js-label-error');
 const cancel = document.querySelector('.js-cancel');
 
-formMenu.addEventListener('click', (event) => {
-  event.preventDefault();
+formMenu.addEventListener('click', handleClick);
+function handleClick(ev){
   if (form.classList.contains('collapsed')) {
-   form.classList.remove("collapsed"); 
-  } else {
-    form.classList.add('collapsed');
-  }
-})
+    showNewCatForm()
+    //form.classList.remove("collapsed"); 
+   } else {
+    hideNewCatForm()
+     //form.classList.add('collapsed');
+   }
+}
+function showNewCatForm() {
+  form.classList.remove('collapsed');
+}
+function hideNewCatForm() {
+  form.classList.add('collapsed');
+}
 
-addButton.addEventListener('click', () => {
+addButton.addEventListener('click', addNewKitten);
+function addNewKitten(event) {
   const valueDesc = inputDesc.value;
   const valuePhoto = inputPhoto.value;
   const valueName = inputName.value;
@@ -114,11 +78,28 @@ addButton.addEventListener('click', () => {
   labelMessageError.innerHTML = '¡Uy! parece que has olvidado algo'
   } else {
   }
-})
-
+}
 cancel.addEventListener('click', () => {
   inputDesc.value = '';
   inputPhoto.value = '';
   inputName.value = '';
   form.classList.add('collapsed');
 })
+
+function renderKitten(url, desc, name, race) {
+  const kitten = `<li class="card">
+  <article>
+  <img
+                class="card_img"
+                src= ${url}
+                alt="sphynx-cat"
+              />
+              <h3 class="card_title">${name} </h3>
+              <h4 class="card_race">${race} </h4>
+              <p class="card_description">
+              ${desc}
+              </p>
+  </article>
+  </li>`;
+  list.innerHTML += `${kitten}`;
+}
