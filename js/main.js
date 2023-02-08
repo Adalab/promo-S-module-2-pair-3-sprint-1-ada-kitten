@@ -27,11 +27,11 @@ renderKitten(kittenTwoImage,kittenTwoDesc, kittenTwoName, kittenTwoRace);
 
 renderKitten(kittenThreeImage,kittenThreeDesc, kittenThreeName, kittenThreeRace);
 
-list.innerHTML = `${kittenOne} ${kittenTwo} ${kittenThree}`;
+// list.innerHTML = `${kittenOne} ${kittenTwo} ${kittenThree}`;
 
 const input_search_desc = document.querySelector('.js_in_search_desc');
-const descrSearchText = input_search_desc.value;
 
+/*
 if( kittenOneDesc.includes(descrSearchText) ) {
   list.innerHTML = `${kittenOne}`;
   } 
@@ -43,6 +43,7 @@ if( kittenTwoDesc.includes(descrSearchText) ) {
 if( kittenThreeDesc.includes(descrSearchText) ) {
     list.innerHTML += `${kittenThree}`;
   }
+  */
 
 const formMenu = document.querySelector('.js-menu');
 const addButton = document.querySelector(".js-btn-add");
@@ -79,12 +80,14 @@ function addNewKitten(event) {
   } else {
   }
 }
+/*
 cancel.addEventListener('click', () => {
   inputDesc.value = '';
   inputPhoto.value = '';
   inputName.value = '';
   form.classList.add('collapsed');
 })
+*/
 
 function renderKitten(url, desc, name, race) {
   const kitten = `<li class="card">
@@ -103,3 +106,35 @@ function renderKitten(url, desc, name, race) {
   </li>`;
   list.innerHTML += `${kitten}`;
 }
+
+
+
+const cancelNewKitten = (event) => {
+  inputDesc.value = '';
+  inputPhoto.value = '';
+  inputName.value = '';
+  form.classList.add('collapsed');
+};
+
+const buttonCancelForm = document.querySelector('.js-cancel');
+buttonCancelForm.addEventListener('click', cancelNewKitten);
+
+const buttonSearch = document.querySelector('.js-button-search');
+
+const filterKitten = (event) => {
+  event.preventDefault();
+  list.innerHTML = '';
+  const descrSearchText = input_search_desc.value;
+  console.log(descrSearchText)
+  
+  if (kittenOneDesc.includes(descrSearchText) || kittenOneRace.includes(descrSearchText)) {
+    renderKitten(kittenOneImage, kittenOneDesc, kittenOneName, kittenOneRace);
+  }
+  if (kittenTwoDesc.includes(descrSearchText)) {
+    renderKitten(kittenTwoImage, kittenTwoDesc, kittenTwoName, kittenTwoRace);
+  }
+  if (kittenThreeDesc.includes(descrSearchText)) {
+    renderKitten(kittenThreeImage, kittenThreeDesc, kittenThreeName, kittenThreeRace);
+  }
+};
+buttonSearch.addEventListener('click', filterKitten);
