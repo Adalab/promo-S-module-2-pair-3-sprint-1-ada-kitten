@@ -43,6 +43,9 @@ const kittenThree = {
   race: 'Maine Coon',
 };
 
+const kittenDataList = [kittenOne, kittenTwo, kittenThree];
+console.log(kittenDataList)
+
 
 renderKitten(kittenOne);
 
