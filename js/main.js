@@ -46,6 +46,15 @@ const kittenThree = {
 const kittenDataList = [kittenOne, kittenTwo, kittenThree];
 console.log(kittenDataList)
 
+function renderKittenList(kittenDataList) {
+
+    for( let i = 0; i < kittenDataList.length; i++){
+
+    renderKitten(kittenData)
+    console.log(kittenData)
+}
+}
+
 
 renderKitten(kittenOne);
 
@@ -152,11 +161,26 @@ const buttonSearch = document.querySelector('.js-button-search');
 
 const filterKitten = (event) => {
   event.preventDefault();
-  list.innerHTML = '';
   const descrSearchText = input_search_desc.value;
-  console.log(descrSearchText)
+  list.innerHTML = '';
+  for (const kittenItem of kittenDataList) {
+
+    if( kittenItem.desc.includes(descrSearchText)){
+        
+      renderKitten(kittenItem)
+    
+    }
   
-  if (kittenOne.desc.includes(descrSearchText) || kittenOne.race.includes(descrSearchText)) {
+      
+
+
+
+
+  }
+
+
+
+  /*if (kittenOne.desc.includes(descrSearchText) || kittenOne.race.includes(descrSearchText)) {
     renderKitten(kittenOne.image, kittenOne.desc, kittenOne.name, kittenOne.race);
   }
   if (kittenTwo.desc.includes(descrSearchText)) {
@@ -164,7 +188,7 @@ const filterKitten = (event) => {
   }
   if (kittenThree.desc.includes(descrSearchText)) {
     renderKitten(kittenThree.image, kittenThree.desc, kittenThree.name, kittenThree.race);
-  }
+  }*/
 };
 buttonSearch.addEventListener('click', filterKitten);
 
